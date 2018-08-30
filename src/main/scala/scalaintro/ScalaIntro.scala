@@ -1,8 +1,11 @@
 package scalaintro
 
 import scala.io.Source
-import swiftvis2.plotting.Plot
+import swiftvis2.plotting
+import swiftvis2.plotting._
 import swiftvis2.plotting.renderer.SwingRenderer
+import swiftvis2.plotting.ColorGradient
+import swiftvis2.plotting.styles.HistogramStyle
 
 case class TempData(day:Int, doy: Int, month: Int, year: Int, precip: Double, tave: Double, tmax: Double, tmin: Double)
 
@@ -39,6 +42,39 @@ object TempData extends App {
 	}
 	monthMedians.toSeq.sortBy(_._1).foreach(println)
 	
-	val plot = Plot.scatterPlot(data.map(_.doy), data.map(_.tmax))
-	SwingRenderer(plot)
+//	val fullPlot = Plot.scatterPlotWithLines(data.map(td => td.year+td.doy/365.0), data.map(_.tmax), 
+//	    "Full Data", "Year", "Temperature", 3, lineGrouping = 0)
+//	SwingRenderer(fullPlot, 800, 800, true)
+	
+	val yearGradient = ColorGradient(1945.0 -> BlackARGB, 1960.0 -> GreenARGB, 1985.0 -> BlueARGB, 2014.0 -> RedARGB)
+	val doyPlot = Plot.scatterPlot(data.map(_.doy), data.map(_.tmax), symbolSize=5,
+	    symbolColor = yearGradient(data.map(_.year)))
+	SwingRenderer(doyPlot, 800, 800, true)
+	
+	val dailyAverage = data.groupBy(_.doy).mapValues(days => days.map(_.tmax).sum/days.length).toArray
+	val dailyPlot = Plot.scatterPlot(dailyAverage.map(_._1), dailyAverage.map(_._2))
+	SwingRenderer(dailyPlot, 800, 800, true)
+	
+	val tempHist = Plot.histogramPlotFromData(0 to 111, data.map(_.tmax), 0x88778822, "Temp Hist", "Temperatures", "Frequency")
+	SwingRenderer(tempHist, 800, 800, true)
+	
+	// Alex's fault
+	val hists = for(year <- 1940 to 2010 by 10) yield {
+	  val d = data.filter(td => td.year >= year && td.year < year+10) 
+	  HistogramStyle.fromData(d.map(_.tmax), 0 to 111, 0x22223355, true)
+	}
+	val histStack = Plot.stacked(hists, "Alex's Plot", "Temps", "Frequency")
+	SwingRenderer(histStack, 800, 800, true)
+	
+	// 4-D plot
+	val size = data.map(_.precip+4)
+	val tempGrad = ColorGradient(40.0 -> BlueARGB, 75.0 -> GreenARGB, 110.0 -> RedARGB)
+	val fourDPlot = Plot.scatterPlot(data.map(_.year), data.map(_.doy), 
+	    "We don't know", "Year", "Day of Year", symbolSize = size, 
+	    symbolColor = tempGrad(data.map(_.tmax)))
+	SwingRenderer(fourDPlot, 800, 800, true)
+	
+	val words = "This is a test of your coding ability.".split(" ")
+	val chars = words.foldLeft(0)((acc, w) => acc+w.length)
+	
 }
