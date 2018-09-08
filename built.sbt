@@ -2,7 +2,7 @@ updateOptions := updateOptions.value.withLatestSnapshots(false)
 
 lazy val root = (project in file("."))
   .settings(
-    name         := "BigData",
+    name         := "BigDataF18",
     organization := "edu.trinity",
     scalaVersion := "2.11.12",
     version      := "0.1.0-SNAPSHOT",
