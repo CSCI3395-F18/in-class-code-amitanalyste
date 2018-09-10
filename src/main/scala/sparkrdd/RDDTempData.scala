@@ -17,7 +17,7 @@ object RDDTempData extends App {
 
   val data = lines.map { line =>
     val p = line.split(",")
-      TempData(p(0).toInt, p(1).toInt, p(2).toInt, p(4).toInt,
+    TempData(p(0).toInt, p(1).toInt, p(2).toInt, p(4).toInt,
         p(5).toDouble, p(6).toDouble, p(7).toDouble, p(8).toDouble)
   }.cache()
 
