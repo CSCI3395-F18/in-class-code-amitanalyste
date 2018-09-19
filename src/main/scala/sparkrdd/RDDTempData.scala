@@ -9,7 +9,7 @@ import scalaintro.TempData
 
 object RDDTempData extends App {
   val conf = new SparkConf().setAppName("Temp Data")
-    .setMaster("local[*]")
+//    .setMaster("local[*]")
   val sc = new SparkContext(conf)
   
   sc.setLogLevel("WARN")
