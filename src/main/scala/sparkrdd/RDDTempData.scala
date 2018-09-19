@@ -8,7 +8,8 @@ import swiftvis2.spark._
 import scalaintro.TempData
 
 object RDDTempData extends App {
-  val conf = new SparkConf().setAppName("Temp Data").setMaster("local[*]")
+  val conf = new SparkConf().setAppName("Temp Data")
+    .setMaster("local[*]")
   val sc = new SparkContext(conf)
   
   sc.setLogLevel("WARN")
