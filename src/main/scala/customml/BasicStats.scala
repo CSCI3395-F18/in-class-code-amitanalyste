@@ -1,7 +1,7 @@
 package customml
 
 object BasicStats {
-  def mean(x: Seq[Double]): Double = ???
+  def mean(x: Seq[Double]): Double = x.sum/x.length
   
   def variance(x: Seq[Double]): Double = ???
   
