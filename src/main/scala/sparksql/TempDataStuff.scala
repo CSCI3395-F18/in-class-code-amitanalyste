@@ -28,18 +28,17 @@ object TempDataStuff extends App {
     //option("inferSchema", "true").
     option("header","true").
     // option("dateFormat", "yyyyMMdd")
-    csv("/users/mlewis/workspaceF18/CSCI3395-F18/data/SanAntonioTemps.csv")
+    csv("data/SanAntonioTemps.csv")
     
   data.show()
   data.describe().show()
   
-  data.select((data("day")+(data("month")-1)*31 === data("dayOfYear")), sqrt(col("day"))).show()
-  data.agg(count(data("day"))).show()
+  data.select(('day+('month-1)*31 === 'dayOfYear), sqrt('day)).show()
+  data.agg(count('day)).show()
   println(data.stat.corr("precip", "tmax"))
   
-  data.createOrReplaceTempView("data")
-  data.select("""
-    SELECT * FROM data WHERE precip>0.1
-  """)
+  data.createOrReplaceTempView("sadata")
+  val rainy = spark.sql("""SELECT * FROM sadata WHERE precip>0.1""")
+  rainy.show()
   
 }
