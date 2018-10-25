@@ -4,7 +4,6 @@ object RandomStudent extends App {
   val students = """
 Thoai
 Arthur
-Ben H.
 Tyler
 Alex
 Gabby
