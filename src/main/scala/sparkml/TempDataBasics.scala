@@ -6,7 +6,9 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.types.StructField
 import org.apache.spark.sql.types.StringType
+import org.apache.spark.ml.linalg
 import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.linalg.SQLDataTypes.VectorType
 
 object TempDataBasics extends App {
   val spark = SparkSession.builder().master("local[*]").appName("Temp Data").getOrCreate()
@@ -37,6 +39,6 @@ object TempDataBasics extends App {
     setInputCols(Array("precip", "tmax", "tmin")).setOutputCol("weatherData")
   val weatherData = weatherDataAssembler.transform(data)
   weatherData.show()
-  val highs = weatherData.select('weatherData)
+  val highs = weatherData.map(_.getAs[linalg.Vector]("weatherData")(1))
   highs.show()
 }
