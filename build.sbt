@@ -18,15 +18,15 @@ lazy val root = (project in file("."))
 //		libraryDependencies += "org.deeplearning4j" % "dl4j-spark_2.11" % "0.9.1_spark_2",
 //		libraryDependencies += "org.datavec" % "datavec-api" % "0.9.1",
 
-//		libraryDependencies += "org.apache.spark" % "spark-core_2.11" % "2.3.1",
-//		libraryDependencies += "org.apache.spark" % "spark-sql_2.11" % "2.3.1",
-//		libraryDependencies += "org.apache.spark" % "spark-mllib_2.11" % "2.3.1",
-//		libraryDependencies += "org.apache.spark" % "spark-graphx_2.11" % "2.3.1"
+		libraryDependencies += "org.apache.spark" % "spark-core_2.11" % "2.3.1",
+		libraryDependencies += "org.apache.spark" % "spark-sql_2.11" % "2.3.1",
+		libraryDependencies += "org.apache.spark" % "spark-mllib_2.11" % "2.3.1",
+		libraryDependencies += "org.apache.spark" % "spark-graphx_2.11" % "2.3.1",
 
-		libraryDependencies += "org.apache.spark" % "spark-core_2.11" % "2.3.1" % "provided",
-		libraryDependencies += "org.apache.spark" % "spark-sql_2.11" % "2.3.1" % "provided",
-		libraryDependencies += "org.apache.spark" % "spark-mllib_2.11" % "2.3.1" % "provided",
-		libraryDependencies += "org.apache.spark" % "spark-graphx_2.11" % "2.3.1" % "provided",
+//		libraryDependencies += "org.apache.spark" % "spark-core_2.11" % "2.3.1" % "provided",
+//		libraryDependencies += "org.apache.spark" % "spark-sql_2.11" % "2.3.1" % "provided",
+//		libraryDependencies += "org.apache.spark" % "spark-mllib_2.11" % "2.3.1" % "provided",
+//		libraryDependencies += "org.apache.spark" % "spark-graphx_2.11" % "2.3.1" % "provided",
 		libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.5",
 		libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 
