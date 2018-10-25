@@ -8,7 +8,7 @@ class BinomialSpec extends FlatSpec with Matchers {
   }
 
   it should "have a variance of 0.25 with inputs 1, Seq(1,0)" in {
-    Binomial(1, Seq(1,0)).mean() should be(0.25)
+    Binomial(1, Seq(1,0)).variance() should be(0.25)
   }
   
 }
