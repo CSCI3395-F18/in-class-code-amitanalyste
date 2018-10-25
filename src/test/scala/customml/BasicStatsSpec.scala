@@ -52,7 +52,7 @@ class TestBasicStats extends FlatSpec with Matchers {
   }
 
   it should "return 1 when called on Array(1,3,5) and Array(4,5,6)" in {
-    BasicStats.correlation(Array(1,3,5), Array(4,5,6)) should be (4.0/3.0)
+    BasicStats.correlation(Array(1,3,5), Array(4,5,6)) should be (1.0)
   }
 
   it should "return 4*sqrt(2/35) when called on Array(1,3,5,2) and Array(4,5,6,5)" in {
